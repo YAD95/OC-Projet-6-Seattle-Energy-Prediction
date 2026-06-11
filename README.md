@@ -286,7 +286,7 @@ Valeurs manquantes : 0
 |-------------------------|----------|---------|----------|-----------|---------|----------------|
 | DummyRegressor (baseline)| —       | -0.001  | 1.019    | 1.280     | Non     | ❌ Inutile     |
 | LinearRegression (Ridge) | 0.596   | 0.559   | 0.645    | 0.849     | Léger   | ⚠️ Trop simple |
-| GradientBoosting        | 0.749    | 0.624   | 0.586    | 0.784     | Modéré  | —              |
+| SVR        | 0.749    | 0.624   | 0.586    | 0.784     | Modéré  | —              |
 | **Random Forest**        | **0.959**| **0.697**| **0.502**| **0.703** | Fort   | ✅ **Retenu**  |
 
 **Pourquoi le Random Forest ?**
@@ -518,7 +518,7 @@ RMSE       : 0.70
 
 ### Pour aller plus loin 
 
-- Tester **GradientBoosting / XGBoost** pour réduire l'overfitting
+- Tester **SVR / XGBoost** pour réduire l'overfitting
 - Enrichir les features avec : données météo, année de rénovation, niveau d'isolation, nombre d'occupants
 - Feature engineering avancé : ratio surface/étages, densité d'occupation
 - Réduire l'overfitting via régularisation ou pruning des arbres
