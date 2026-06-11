@@ -31,9 +31,9 @@
 
 ---
 
-## 🌍 Contexte & Problématique
+## --- Contexte & Problématique---
 
-Les bâtiments représentent environ **40 % de la consommation d'énergie mondiale**. Dans le cadre de son engagement vers la **neutralité carbone d'ici 2050**, la ville de Seattle impose aux grands bâtiments non-résidentiels de déclarer leur consommation énergétique annuelle via le programme *Benchmarking*.
+### Les bâtiments représentent environ **40 % de la consommation d'énergie mondiale**. Dans le cadre de son engagement vers la **neutralité carbone d'ici 2050**, la ville de Seattle impose aux grands bâtiments non-résidentiels de déclarer leur consommation énergétique annuelle via le programme *Benchmarking*.
 
 Ce programme génère chaque année un dataset public contenant les caractéristiques structurelles des bâtiments (surface, type d'usage, année de construction…) ainsi que leurs consommations mesurées. **Le problème** : pour un nouveau bâtiment, ou pour cibler des rénovations prioritaires, on a besoin d'estimer la consommation **avant** toute mesure.
 
@@ -49,7 +49,7 @@ Ce programme génère chaque année un dataset public contenant les caractérist
 
 ---
 
-## 📁 ---Structure du projet---
+##  ---Structure du projet---
 
 ```
 OC-Projet-6-Anticipez-Consommation-Energie-Batiments/
