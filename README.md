@@ -390,8 +390,8 @@ GCP Cloud Run (API accessible publiquement)
 
 ```bash
 # 1. Cloner le repo
-git clone https://github.com/YAD95/OC-Projet-6-Anticipez-Consommation-Energie-Batiments.git
-cd OC-Projet-6-Anticipez-Consommation-Energie-Batiments
+git clone https://github.com/YAD95/OC-Projet-6-Seattle-Energy-Prediction.git
+cd OC-Projet-6-Seattle-Energy-Prediction
 
 # 2. Installer les dépendances
 pip install bentoml scikit-learn numpy pandas pydantic
