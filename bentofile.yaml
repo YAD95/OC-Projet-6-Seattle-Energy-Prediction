@@ -1,0 +1,18 @@
+service: "service:SeattleEnergyService"
+
+labels:
+  owner: daniel-yilmaz
+  project: seattle-energy
+
+include:
+  - "service.py"
+
+models:
+  - seattle_energy_model:latest
+
+python:
+  packages:
+    - scikit-learn==1.8.0
+    - numpy
+    - pandas
+    - pydantic
