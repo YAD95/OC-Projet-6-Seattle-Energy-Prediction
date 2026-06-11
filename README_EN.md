@@ -1,3 +1,4 @@
+🇬🇧 English| readme en  français 👉 [🇫🇷 Français](README.md)
 # OC — Project 6 · Predict Building Energy Consumption in Seattle
 
 > **Random Forest · BentoML · Google Cloud Run** — Predicting the energy consumption of non-residential buildings in Seattle from their structural characteristics, without ever measuring them. Final R² = 0.74, deployed as a REST API on GCP.
