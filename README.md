@@ -1,4 +1,4 @@
-# 🏙️ OC — Projet 6 · Anticipez la Consommation Énergétique des Bâtiments de Seattle
+#  OC — Projet 6 · Anticipez la Consommation Énergétique des Bâtiments de Seattle
 
 > **Random Forest · BentoML · Google Cloud Run** — Prédiction de la consommation énergétique des bâtiments non-résidentiels de Seattle à partir de leurs caractéristiques structurelles, sans jamais les avoir mesurés. R² final = 0.74, déployé en API REST sur GCP.
 
@@ -39,7 +39,7 @@ Ce programme génère chaque année un dataset public contenant les caractérist
 
 ### Objectif
 
-> Entraîner un modèle de Machine Learning capable d'**estimer la consommation énergétique annuelle (kBtu)** de tout bâtiment de Seattle à partir de ses caractéristiques structurelles — **sans jamais l'avoir mesuré**. Ce modèle est ensuite exposé via une **API REST déployée dans le cloud**, accessible en production.
+> *Entraîner un modèle de Machine Learning capable d'**estimer la consommation énergétique annuelle (kBtu)** de tout bâtiment de Seattle à partir de ses caractéristiques structurelles — **sans jamais l'avoir mesuré**. Ce modèle est ensuite exposé via une **API REST déployée dans le cloud**, accessible en production.* 
 
 ### Pourquoi c'est utile ?
 
@@ -49,7 +49,7 @@ Ce programme génère chaque année un dataset public contenant les caractérist
 
 ---
 
-## 📁 Structure du projet
+## 📁 ---Structure du projet---
 
 ```
 OC-Projet-6-Anticipez-Consommation-Energie-Batiments/
@@ -68,7 +68,7 @@ OC-Projet-6-Anticipez-Consommation-Energie-Batiments/
 
 ---
 
-## 🛠️ Stack technique
+##  ---Stack technique---
 
 | Domaine              | Technologies                                      |
 |----------------------|---------------------------------------------------|
@@ -136,7 +136,7 @@ Plutôt que d'appliquer des méthodes aveugles (IQR classique → 62.9 % de pert
 
 | Méthode                     | Perte de données |
 |-----------------------------|-----------------|
-| ✅ Nettoyage ciblé (retenu) | **3.2 %**       |
+| ✅Nettoyage ciblé (retenu) | **3.2 %**       |
 | Percentiles aveugles        | 12 %            |
 | IQR classique               | 62.9 %          |
 
@@ -515,7 +515,7 @@ RMSE       : 0.70
 - **Plafond à 0.74** : non résolu par les hyperparamètres — le facteur limitant est la richesse des features
 - **Quartiers** (`Neighborhood`) n'apportent quasi rien au modèle (<0.01 % chacun)
 
-### Pour aller plus loin 🚀
+### Pour aller plus loin 
 
 - Tester **GradientBoosting / XGBoost** pour réduire l'overfitting
 - Enrichir les features avec : données météo, année de rénovation, niveau d'isolation, nombre d'occupants
@@ -540,4 +540,4 @@ EDA → Log Transform → Nettoyage ciblé → Data Leakage → Feature Engineer
 
 ---
 
-*Projet réalisé dans le cadre du parcours **Data Scientist** — OpenClassrooms · Daniel YILMAZ · Juin 2026*
+*Projet réalisé dans le cadre du parcours **Data Engineer** — OpenClassrooms · Daniel Alican YILMAZ · Juin 2026*
