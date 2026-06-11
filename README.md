@@ -1,4 +1,4 @@
-🇫🇷 Français | readme in english  👉[🇬🇧 English](README_ENG.md)
+🇫🇷 Français | readme in english  👉[🇬🇧 English]( README_EN.md)
 #  OC  Projet 6 · Anticipez la Consommation Énergétique des Bâtiments de Seattle
 
 > **Random Forest · BentoML · Google Cloud Run** — Prédiction de la consommation énergétique des bâtiments non-résidentiels de Seattle à partir de leurs caractéristiques structurelles, sans jamais les avoir mesurés. R² final = 0.74, déployé en API REST sur GCP.
