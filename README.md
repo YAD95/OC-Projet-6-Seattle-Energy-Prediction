@@ -1,4 +1,4 @@
-#  OC — Projet 6 · Anticipez la Consommation Énergétique des Bâtiments de Seattle
+#  OC  Projet 6 · Anticipez la Consommation Énergétique des Bâtiments de Seattle
 
 > **Random Forest · BentoML · Google Cloud Run** — Prédiction de la consommation énergétique des bâtiments non-résidentiels de Seattle à partir de leurs caractéristiques structurelles, sans jamais les avoir mesurés. R² final = 0.74, déployé en API REST sur GCP.
 
@@ -39,7 +39,7 @@ Ce programme génère chaque année un dataset public contenant les caractérist
 
 ### Objectif
 
-### > *Entraîner un modèle de Machine Learning capable d'**estimer la consommation énergétique annuelle (kBtu)** de tout bâtiment de Seattle à partir de ses caractéristiques structurelles — **sans jamais l'avoir mesuré**. Ce modèle est ensuite exposé via une **API REST déployée dans le cloud**, accessible en production.* 
+### > *Entraîner un modèle de Machine Learning capable d'**estimer la consommation énergétique annuelle (kBtu)** de tout bâtiment de Seattle à partir de ses caractéristiques structurelles  **sans jamais l'avoir mesuré**. Ce modèle est ensuite exposé via une **API REST déployée dans le cloud**, accessible en production.* 
 
 ### Pourquoi c'est utile ?
 
@@ -82,11 +82,11 @@ OC-Projet-6-Anticipez-Consommation-Energie-Batiments/
 
 ---
 
-## 🔬 Mission 1 — Modélisation ML
+## 🔬 Mission 1 : Modélisation ML
 
 ### Le dataset brut
 
-- **Source** : Seattle Building Energy Benchmarking 2016 — [data.seattle.gov](https://data.seattle.gov/resource/2bpz-gwpy.csv)
+- **Source** : Seattle Building Energy Benchmarking 2016 : [data.seattle.gov](https://data.seattle.gov/resource/2bpz-gwpy.csv)
 - **Taille initiale** : 3 376 bâtiments · 46 colonnes
 - **Périmètre** : bâtiments non-résidentiels uniquement
 - **Année des relevés** : 2016
@@ -122,8 +122,8 @@ Plutôt que d'appliquer des méthodes aveugles (IQR classique → 62.9 % de pert
 
 | Critère supprimé                      | Raison                                                               |
 |---------------------------------------|----------------------------------------------------------------------|
-| `BuildingType = Multifamily`          | Hors périmètre : bâtiments résidentiels — ~1 700 lignes              |
-| Outliers signalés par la mairie       | Déjà identifiés officiellement comme aberrants — quelques lignes     |
+| `BuildingType = Multifamily`          | Hors périmètre : bâtiments résidentiels : ~1 700 lignes              |
+| Outliers signalés par la mairie       | Déjà identifiés officiellement comme aberrants : quelques lignes     |
 | `SiteEnergyUse = 0`                   | Erreur de relevé probable pour un bâtiment en activité              |
 | `PropertyGFATotal = 0`                | Impossible physiquement : un bâtiment ne peut avoir une surface nulle |
 | `YearBuilt` hors 1900–2016            | Années incohérentes (antérieures à 1900 ou postérieures au relevé)   |
@@ -183,11 +183,11 @@ Trois visualisations clés ont guidé les décisions de modélisation :
 - Les entrepôts (`Warehouse`) et les hôpitaux affichent des médianes nettement plus élevées que les bureaux
 - Forte hétérogénéité inter-catégories → justifie l'inclusion du `PrimaryPropertyType`
 
-> **Insight clé** : La surface (`GFATotal`) et le type de bâtiment expliquent à eux deux la majeure partie de la variance — conclusion confirmée par la feature importance en fin de projet (71 % pour GFATotal seul).
+> **Insight clé** : La surface (`GFATotal`) et le type de bâtiment expliquent à eux deux la majeure partie de la variance, conclusion confirmée par la feature importance en fin de projet (71 % pour GFATotal seul).
 
 ---
 
-### Data Leakage — Le piège évité
+### Data Leakage : Le piège évité
 
 #### C'est quoi le Data Leakage ?
 
@@ -222,28 +222,28 @@ Le data leakage consiste à inclure dans les features d'entraînement des colonn
 
 Quatre transformations ont été appliquées pour enrichir les données existantes :
 
-#### A. `BuildingAge` — Temporalité
+#### A. `BuildingAge` :  Temporalité
 ```
 Formule : BuildingAge = 2016 − YearBuilt
 Exemple : YearBuilt = 1990 → BuildingAge = 26
 ```
 Une date absolue n'a pas de sens direct pour un algorithme ML. Un âge est une grandeur continue interprétable : un bâtiment plus vieux est généralement moins bien isolé.
 
-#### B. `IsMultiUse` — Structure d'usage
+#### B. `IsMultiUse` : Structure d'usage
 ```
 Formule : 1 si SecondUseType ≠ "None", sinon 0
 Exemple : SecondUseType = "Hotel" → IsMultiUse = 1
 ```
 Un bâtiment multi-usage (bureaux + commerces, hôtel + restaurant...) consomme différemment d'un bâtiment mono-usage. Ce flag binaire capture cette information sans créer de leakage.
 
-#### C. `HasGas` & `HasSteam` — Équipements
+#### C. `HasGas` & `HasSteam` : Équipements
 ```
 Formule : NaturalGas(kBtu) > 0 → HasGas = 1
 Exemple : NaturalGas = 500 → HasGas = 1
 ```
 On veut savoir **si** le bâtiment est raccordé au gaz, pas **combien** il en consomme. La quantité serait du leakage, le flag binaire est une information structurelle.
 
-#### D. Suppression des redondances — Corrélation Spearman
+#### D. Suppression des redondances : Corrélation Spearman
 ```
 Critère : |r| ≥ 0.85 → colonne supprimée
 Exemple : PropertyGFABuilding(s) corrélée à 0.978 avec PropertyGFATotal → supprimée
@@ -252,7 +252,7 @@ Trois colonnes mesuraient la même réalité physique (la surface totale). On co
 
 ---
 
-### Préparation finale — Split X/y
+### Préparation finale : Split X/y
 
 #### One-Hot Encoding (OHE)
 
@@ -294,13 +294,13 @@ Seul modèle à capturer les **relations non-linéaires** entre features. Un R²
 
 ---
 
-### Optimisation — GridSearchCV
+### Optimisation : GridSearchCV
 
 `GridSearchCV` teste automatiquement toutes les combinaisons d'hyperparamètres avec cross-validation (5 folds) à chaque fois, puis retourne la meilleure.
 
 #### Stratégie en deux étapes
 
-**Étape 1 — Petite grille de test** (~10 combinaisons)
+**Étape 1 : Petite grille de test** (~10 combinaisons)
 
 ```python
 param_grid = {
@@ -313,7 +313,7 @@ param_grid = {
 # Enseignement : max_depth=10 >> max_depth=5
 ```
 
-**Étape 2 — Grande grille d'optimisation** (~500 combinaisons)
+**Étape 2 : Grande grille d'optimisation** (~500 combinaisons)
 
 ```python
 param_grid = {
@@ -362,13 +362,13 @@ min_samples_split = 10
 
 **Analyse des résultats :**
 
-- **Dominantes (~79 %)** : `PropertyGFATotal` + `ENERGYSTARScore` — ces 2 features expliquent l'essentiel du modèle
-- **Utiles (~11 %)** : `Warehouse`, `BuildingAge`, `HasGas`, `NbFloors` — contributions modestes mais pertinentes
-- **Bruit (~10 %)** : tous les `Neighborhood_*` + types rares — importance < 0.01 chacune
+- **Dominantes (~79 %)** : `PropertyGFATotal` + `ENERGYSTARScore` : ces 2 features expliquent l'essentiel du modèle
+- **Utiles (~11 %)** : `Warehouse`, `BuildingAge`, `HasGas`, `NbFloors` : contributions modestes mais pertinentes
+- **Bruit (~10 %)** : tous les `Neighborhood_*` + types rares : importance < 0.01 chacune
 
 ---
 
-## 🚀 Mission 2 — API & Déploiement Cloud
+## 🚀 Mission 2 : API & Déploiement Cloud
 
 ### Architecture générale
 
@@ -444,7 +444,7 @@ bentoml serve service:SeattleEnergyService
 }
 ```
 
-> `prediction_log` est la prédiction dans l'espace log. `prediction_kBtu` est la valeur ré-inversée (`exp(prediction_log) - 1`) — c'est le chiffre exploitable par l'utilisateur.
+> `prediction_log` est la prédiction dans l'espace log. `prediction_kBtu` est la valeur ré-inversée (`exp(prediction_log) - 1`) : c'est le chiffre exploitable par l'utilisateur.
 
 ### Validation des données (Pydantic)
 
@@ -509,10 +509,10 @@ RMSE       : 0.70
 
 ### Limites identifiées ⚠️
 
-- **Overfitting** : R² train 0.90 vs test 0.74 — persistant malgré GridSearch
+- **Overfitting** : R² train 0.90 vs test 0.74 c'est persistant malgré GridSearch
 - **Dépendance excessive** : 71 % de l'importance repose sur une seule feature (`PropertyGFATotal`)
 - **Données manquantes** : météo locale, niveau d'isolation, nombre d'occupants
-- **Plafond à 0.74** : non résolu par les hyperparamètres — le facteur limitant est la richesse des features
+- **Plafond à 0.74** : non résolu par les hyperparamètres, le facteur limitant est la richesse des features
 - **Quartiers** (`Neighborhood`) n'apportent quasi rien au modèle (<0.01 % chacun)
 
 ### Pour aller plus loin 
@@ -534,10 +534,10 @@ EDA → Log Transform → Nettoyage ciblé → Data Leakage → Feature Engineer
 
 ## 📊 Données
 
-- **Source** : [Seattle Building Energy Benchmarking — Data.Seattle.gov](https://data.seattle.gov/resource/2bpz-gwpy.csv)
-- **Fichier inclus** : `2016_Building_Energy_Benchmarking.csv` — inclus dans le repo pour permettre une reproduction complète du projet
+- **Source** : [Seattle Building Energy Benchmarking - Data.Seattle.gov](https://data.seattle.gov/resource/2bpz-gwpy.csv)
+- **Fichier inclus** : `2016_Building_Energy_Benchmarking.csv`  inclus dans le repo pour permettre une reproduction complète du projet
 - **Périmètre** : bâtiments non-résidentiels de Seattle, données 2016
 
 ---
 
-*Projet réalisé dans le cadre du parcours **Data Engineer** — OpenClassrooms · Daniel Alican YILMAZ · Juin 2026*
+*Projet réalisé dans le cadre du parcours **Data Engineer** - OpenClassrooms · Daniel Alican YILMAZ · Juin 2026*
